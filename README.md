@@ -22,4 +22,4 @@ each of which can be viewed in a carousel.
 
 ## Deployed Site
 
-Chat out [this site.](https://jaradharper.github.io/ai-se_project_flashcards/#home)
+Check out [this site.](https://jaradharper.github.io/ai-se_project_flashcards/#home)
