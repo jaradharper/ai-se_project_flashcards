@@ -19,3 +19,7 @@ each of which can be viewed in a carousel.
 - CSS
 - Git
 - Github
+
+## Deployed Site
+
+Chat out [this site.](https://jaradharper.github.io/ai-se_project_flashcards/#home)
