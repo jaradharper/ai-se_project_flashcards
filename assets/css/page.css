@@ -1,0 +1,19 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 20px 40px 32px;
+  max-width: 1440px;
+  background-color: #ececec;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.page__main-content {
+  margin-top: 60px;
+  margin-bottom: 138px;
+}
+
+.page__main-content_location_carousel {
+  margin: 106px 0 0;
+}
