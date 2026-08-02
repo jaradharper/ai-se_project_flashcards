@@ -4,30 +4,30 @@ import { renderCarouselView } from "./carousel.js";
 import { getDeckByID } from "./decks.js";
 
 const cardDeck = document.querySelector("#my-template");
-const cardDeckContainer = document.querySelector(".decks__list");
+const cardDeckContainer = document.querySelector(".gallery__list");
 const mainContent = document.querySelector(".page__main-content");
 const carouselEl = document.querySelector(".carousel");
 
 function createDeckEl(itemInDecks) {
-  const cardEl = cardDeck.content.querySelector(".deck").cloneNode(true);
+  const cardEl = cardDeck.content.querySelector(".card").cloneNode(true);
 
-  const deckLink = cardEl.querySelector(".deck__link");
+  const deckLink = cardEl.querySelector(".card__link");
   deckLink.href = `#carousel/${itemInDecks.id}`;
 
-  const cardTitle = cardEl.querySelector(".deck__title");
+  const cardTitle = cardEl.querySelector(".card__title");
   cardTitle.textContent = itemInDecks.name;
 
-  const deleteBtn = cardEl.querySelector(".deck__delete-btn");
+  const deleteBtn = cardEl.querySelector(".card__delete-btn");
 
   deleteBtn.addEventListener("click", () => {
     cardEl.remove();
   });
 
   const color = hexToString(itemInDecks.color);
-  cardEl.classList.add(`deck_color_${color}`);
+  cardEl.classList.add(`card_color_${color}`);
 
   const cardCount = itemInDecks.cards.length;
-  const cardCountText = cardEl.querySelector(".deck__count");
+  const cardCountText = cardEl.querySelector(".card__count");
   cardCountText.textContent = `${cardCount} cards`;
 
   return cardEl;
