@@ -65,34 +65,41 @@
         </div>
       </section>
 
-      <section id="deck-view" class="gallery">
+      <section id="deck-view" class="gallery gallery_type_deck">
         <div class="gallery__title-row">
-          <h2 class="gallery__title">hello</h2>
-          <button type="button" class="button gallery__new-card-btn">
+          <h2 class="gallery__title"></h2>
+          <button
+            type="button"
+            class="button button_type_primary gallery__practice-btn"
+          >
             Practice
           </button>
         </div>
-        <div class="wrapping-row">
-          <ul class="gallery__list wrapping-row__display-contents">
+        <div class="gallery__content">
+          <ul class="gallery__list">
             <template id="card-template">
               <li class="card">
                 <h3 class="card__title"></h3>
                 <div class="card__row">
                   <button
                     type="button"
-                    aria-label="A new button I don't know what the hell it does."
-                    class="card__new-btn"
+                    aria-label="Flip card"
+                    class="button card__flip-btn"
                   ></button>
                   <button
                     type="button"
-                    aria-label="Delete deck"
-                    class="card__delete-btn"
+                    aria-label="Delete card"
+                    class="button card__delete-btn card__delete-btn_type_icon"
                   ></button>
                 </div>
               </li>
             </template>
           </ul>
-          <button type="button" class="button gallery__new-card-btn">
+          <button
+            type="button"
+            class="button gallery__new-card-btn"
+            aria-label="Add a new card"
+          >
             + New Card
           </button>
         </div>

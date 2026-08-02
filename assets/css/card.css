@@ -62,9 +62,36 @@
   cursor: pointer;
 }
 
+.card__flip-btn {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  background: url("../images/flip.svg") center / contain no-repeat;
+  opacity: 50%;
+  z-index: 2;
+}
+
+.card__flip-btn:hover {
+  opacity: 100%;
+}
+
+.card__delete-btn_type_icon {
+  background: url("../images/delete.svg") center / contain no-repeat;
+}
+
+.card_color_white {
+  background-color: #fff;
+}
+
 .card__title {
   font-size: 24px;
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0;
+}
+
+@media (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
 }

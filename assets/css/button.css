@@ -4,3 +4,14 @@
   background-color: transparent;
   cursor: pointer;
 }
+
+.button_type_primary {
+  padding: 12px 20px;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.button_type_primary:hover {
+  background-color: #444;
+}

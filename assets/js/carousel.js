@@ -70,27 +70,27 @@ function renderCarouselView(deck) {
     updateArrows();
   }
 
-  rightBtn.addEventListener("click", () => {
+  rightBtn.onclick = () => {
     if (currentIndex < deck.cards.length - 1) {
       currentIndex++;
       showingQuestion = true;
       updateDisplay();
     }
-  });
+  };
 
-  leftBtn.addEventListener("click", () => {
+  leftBtn.onclick = () => {
     if (currentIndex > 0) {
       showingQuestion = true;
       currentIndex--;
       updateDisplay();
     }
-  });
+  };
 
-  flipButton.addEventListener("click", () => {
+  flipButton.onclick = () => {
     showingQuestion = !showingQuestion;
 
     updateDisplay();
-  });
+  };
 
   updateDisplay();
 }

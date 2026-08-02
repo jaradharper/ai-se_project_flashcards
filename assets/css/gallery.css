@@ -4,9 +4,30 @@
   flex-wrap: wrap;
 }
 
+.gallery_type_deck {
+  display: none;
+}
+
+.gallery__title-row {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.gallery__content {
+  display: contents;
+}
+
 .gallery__title {
   margin-top: 0;
   margin-bottom: 40px;
+  font-size: 40px;
+  line-height: 1.2;
+}
+
+.gallery__practice-btn {
+  flex: none;
 }
 
 .gallery__list {
@@ -37,4 +58,14 @@
 .gallery__new-card-btn:hover {
   background-color: #c5c5c5;
   color: #1a1a1a;
+}
+
+@media (max-width: 480px) {
+  .gallery__title {
+    font-size: 32px;
+  }
+
+  .gallery__new-card-btn {
+    width: 100%;
+  }
 }
