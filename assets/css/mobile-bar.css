@@ -1,0 +1,28 @@
+@media screen and (max-width: 393px) {
+  .header__link {
+    font-size: 20px;
+  }
+
+  .header__title {
+    font-size: 16px;
+  }
+
+  .section__title {
+    font-size: 32px;
+  }
+
+  main.page__main-content {
+    margin-top: 20px;
+  }
+
+  div.gallery {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, minmax(min(325px, 100%), 353px));
+  }
+
+  .card {
+    aspect-ratio: auto;
+    width: 353px;
+  }
+}
