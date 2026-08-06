@@ -13,7 +13,7 @@ function renderCarouselView(deck) {
   const leftBtn = carouselEl.querySelector(".carousel__btn_type_left");
   const rightBtn = carouselEl.querySelector(".carousel__btn_type_right");
   const sectionTitle = carouselEl.querySelector(".carousel__title");
-  const cardElement = carouselEl.querySelector(".carousel__card");
+  const gridElement = carouselEl.querySelector(".carousel__grid");
   const cardTextElement = carouselEl.querySelector(".carousel__card-text");
   const flipButton = carouselEl.querySelector(
     ".carousel__btn.carousel__btn_type_flip",

@@ -45,11 +45,11 @@ function renderDeckView(deck) {
   practiceButton.onclick = () => {
     window.location.hash = `carousel/${deck.id}`;
   };
-  deckView.style.display = "flex";
+  deckView.classList.add("gallery_type_deck_visible");
 }
 
 function hideDeckView() {
-  deckView.style.display = "none";
+  deckView.classList.remove("gallery_type_deck_visible");
 }
 
 export { hideDeckView, renderDeckView };
