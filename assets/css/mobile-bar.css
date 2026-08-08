@@ -99,8 +99,8 @@
     letter-spacing: 0%;
   }
 
-  .gallery__new-card-btn,
-  .gallery__practice-btn {
+  .gallery_type_deck .gallery__new-card-btn,
+  .gallery_type_deck .gallery__practice-btn {
     position: fixed;
     justify-content: center;
     align-items: center;
@@ -122,7 +122,7 @@
     z-index: 2;
   }
 
-  .gallery__new-card-btn {
+  .gallery_type_deck .gallery__new-card-btn {
     left: calc(50% - 180px);
     right: auto;
     border-radius: 8px;
@@ -130,7 +130,7 @@
     color: #1a1a1a80;
   }
 
-  .gallery__practice-btn {
+  .gallery_type_deck .gallery__practice-btn {
     left: calc(50% + 10px);
     right: auto;
     border-radius: 8px;
