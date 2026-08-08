@@ -6,9 +6,6 @@ function renderCarouselView(deck) {
   let currentIndex = 0;
   let showingQuestion = true;
 
-  const homeSection = document.querySelector("#home");
-  const notFoundSection = document.querySelector("#not-found");
-
   const carouselEl = document.querySelector(".carousel");
   const leftBtn = carouselEl.querySelector(".carousel__btn_type_left");
   const rightBtn = carouselEl.querySelector(".carousel__btn_type_right");
@@ -20,10 +17,6 @@ function renderCarouselView(deck) {
   );
 
   removeColorClasses(cardTextElement);
-
-  carouselEl.style.display = "flex";
-  homeSection.style.display = "none";
-  notFoundSection.style.display = "none";
 
   const color = hexToString(deck.color);
   cardTextElement.classList.add(`carousel__card-text_color_${color}`);

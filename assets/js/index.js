@@ -2,12 +2,23 @@ import { decks } from "./decks.js";
 import { hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
 import { getDeckByID } from "./decks.js";
-import { hideDeckView, renderDeckView } from "./deck-view.js";
+import { renderDeckView } from "./deck-view.js";
 
 const cardDeck = document.querySelector("#my-template");
 const cardDeckContainer = document.querySelector(".gallery__list");
 const mainContent = document.querySelector(".page__main-content");
 const carouselEl = document.querySelector(".carousel");
+const deckViewSection = document.querySelector("#deck-view");
+const page = document.querySelector(".page");
+const sections = document.querySelectorAll(".page__main-content > section");
+
+function showView(currentSection, display) {
+  sections.forEach((section) => {
+    section.style.display = "none";
+  });
+
+  currentSection.style.display = display;
+}
 
 function createDeckEl(itemInDecks) {
   const cardEl = cardDeck.content.querySelector(".card").cloneNode(true);
@@ -46,17 +57,13 @@ const homeSection = document.querySelector("#home");
 const notFoundSection = document.querySelector("#not-found");
 
 function renderHomeView() {
-  hideDeckView();
-  carouselEl.style.display = "none";
-  homeSection.style.display = "block";
-  notFoundSection.style.display = "none";
+  showView(homeSection, "block");
+  page.classList.remove("page_no-mobile-bar");
 }
 
 function renderNotFoundView() {
-  hideDeckView();
-  homeSection.style.display = "none";
-  carouselEl.style.display = "none";
-  notFoundSection.style.display = "block";
+  showView(notFoundSection, "block");
+  page.classList.add("page_no-mobile-bar");
 }
 
 function router() {
@@ -70,13 +77,12 @@ function router() {
     renderHomeView();
     mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash.startsWith("deck/") && deck) {
-    homeSection.style.display = "none";
-    notFoundSection.style.display = "none";
-    carouselEl.style.display = "none";
+    showView(deckViewSection, "grid");
     renderDeckView(deck);
     mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash.startsWith("carousel/") && deck && deck.cards.length) {
-    hideDeckView();
+    page.classList.add("page_no-mobile-bar");
+    showView(carouselEl, "flex");
     renderCarouselView(deck);
     mainContent.classList.add("page__main-content_location_carousel");
   } else {

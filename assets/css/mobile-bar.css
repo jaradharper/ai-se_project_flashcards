@@ -66,6 +66,10 @@
     z-index: 1;
   }
 
+  .page_no-mobile-bar::after {
+    display: none;
+  }
+
   .footer {
     position: fixed;
     display: flex;

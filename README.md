@@ -1,24 +1,29 @@
 # Project 1: TripleTen Flash Card App
 
-My first project in TripleTen's AI-Assisted Software
-Engineering program. It includes decks of flashcards,
-each of which can be viewed in a carousel.
+This is my first project in TripleTen's AI-Assisted Software Engineering
+program. The app organizes flashcards into decks and provides multiple views
+for browsing, managing, and practicing cards.
 
 ## Project Features
 
-- semantic html 5
-- flexbox
-- positioning
-- vertical stacking with z-index
-- Utilizing Javascript to make flashcards dynamic. Such as deleting cards and flipping cards.
+- An open deck view that displays a selected deck's cards and provides options
+  to add a card, delete cards, or begin a practice session
+- A confirmation modal that helps prevent users from accidentally deleting
+  content
+- A carousel practice view with previous, next, and flip-card controls
+- Responsive layouts for desktop, tablet, and mobile screen sizes
+- A mobile action bar that adapts to the active view without obscuring the
+  carousel or 404 page
+- Hash-based navigation between the deck gallery, open deck, carousel, and 404
+  views
+- Dynamic card rendering, flipping, and deletion with JavaScript
 
-## Features
+## Technologies
 
-- Javascript
-- HTML
-- CSS
-- Git
-- Github
+- Semantic HTML5
+- CSS, Flexbox, Grid, media queries, positioning, and z-index
+- JavaScript and DOM manipulation
+- Git and GitHub
 
 ## Deployed Site
 

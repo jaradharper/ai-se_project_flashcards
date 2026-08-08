@@ -5,6 +5,7 @@ const title = deckView.querySelector(".gallery__title");
 const cardList = deckView.querySelector(".gallery__list");
 const cardTemplate = document.querySelector("#card-template");
 const practiceButton = deckView.querySelector(".gallery__practice-btn");
+const page = document.querySelector(".page");
 
 function createCardElement(card, deck) {
   const cardElement = cardTemplate.content
@@ -39,6 +40,7 @@ function createCardElement(card, deck) {
 }
 
 function renderDeckView(deck) {
+  page.classList.remove("page_no-mobile-bar");
   title.textContent = deck.name;
   cardList.replaceChildren();
   deck.cards.forEach((card) => cardList.append(createCardElement(card, deck)));
@@ -48,8 +50,4 @@ function renderDeckView(deck) {
   deckView.classList.add("gallery_type_deck_visible");
 }
 
-function hideDeckView() {
-  deckView.classList.remove("gallery_type_deck_visible");
-}
-
-export { hideDeckView, renderDeckView };
+export { renderDeckView };
