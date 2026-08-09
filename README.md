@@ -28,3 +28,8 @@ for browsing, managing, and practicing cards.
 ## Deployed Site
 
 Check out [this site.](https://jaradharper.github.io/ai-se_project_flashcards/#home)
+
+## Project Pitch Video
+
+Check out [this video](https://drive.google.com/file/d/1CtSMvZAnSmKS-zVeBQykMQI4Bg6jZj_h/view?usp=drive_link), where I describe my
+project and some challenges I faced while building it.
