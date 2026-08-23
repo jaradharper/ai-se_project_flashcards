@@ -5,10 +5,12 @@ import { getDeckByID } from "./decks.js";
 import { renderDeckView } from "./deck-view.js";
 
 const cardDeck = document.querySelector("#my-template");
+const newDeckButton = document.querySelector("#home .gallery__new-card-btn");
 const cardDeckContainer = document.querySelector(".gallery__list");
 const mainContent = document.querySelector(".page__main-content");
 const carouselEl = document.querySelector(".carousel");
 const deckViewSection = document.querySelector("#deck-view");
+const newDeckView = document.querySelector("#new-deck-view");
 const page = document.querySelector(".page");
 const sections = document.querySelectorAll(".page__main-content > section");
 
@@ -76,6 +78,10 @@ function router() {
   if (hash === "home") {
     renderHomeView();
     mainContent.classList.remove("page__main-content_location_carousel");
+  } else if (hash === "new-deck" || hash === "new-deck-view") {
+    showView(newDeckView, "block");
+    page.classList.remove("page_no-mobile-bar");
+    mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash.startsWith("deck/") && deck) {
     showView(deckViewSection, "grid");
     renderDeckView(deck);
@@ -91,5 +97,8 @@ function router() {
   }
 }
 
+newDeckButton.addEventListener("click", () => {
+  window.location.hash = "new-deck";
+});
 window.addEventListener("DOMContentLoaded", router);
 window.addEventListener("hashchange", router);

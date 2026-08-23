@@ -12,6 +12,6 @@
   color: #fff;
 }
 
-.button_type_primary:hover {
+.button_type_primary:not(:disabled):hover {
   background-color: #444;
 }
