@@ -3,6 +3,7 @@ import { hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
 import { getDeckByID } from "./decks.js";
 import { renderDeckView } from "./deck-view.js";
+import { disableSubmitBtn } from "./new-deck-view.js";
 
 const cardDeck = document.querySelector("#my-template");
 const newDeckButton = document.querySelector("#home .gallery__new-card-btn");
@@ -73,6 +74,8 @@ function router() {
   const hashSplitter = hash.split("/");
   const hashId = hashSplitter[1];
 
+  disableSubmitBtn();
+
   const deck = getDeckByID(hashId);
 
   if (hash === "home") {
@@ -80,6 +83,7 @@ function router() {
     mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash === "new-deck" || hash === "new-deck-view") {
     showView(newDeckView, "block");
+    disableSubmitBtn();
     page.classList.remove("page_no-mobile-bar");
     mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash.startsWith("deck/") && deck) {
