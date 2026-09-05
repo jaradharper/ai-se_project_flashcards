@@ -4,31 +4,81 @@ const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 const form = document.querySelector("#new-deck-form");
 const sbmtBtn = document.querySelector(".new-deck-view__submit-btn");
 const txtArea = document.querySelector("#new-deck-view__textarea");
+const errorModal = document.querySelector("#error-modal");
+const errorModalCloseButton = errorModal.querySelector(".modal__close_btn");
+const errorModalMessage = errorModal.querySelector(".modal__error");
 
 function disableSubmitBtn() {
   sbmtBtn.disabled = false;
 }
 
+function closeModal() {
+  errorModal.classList.remove("modal_visible");
+}
+
+errorModalCloseButton.addEventListener("click", closeModal);
+
+function showError(message) {
+  errorModalMessage.textContent = message;
+  errorModal.classList.add("modal_visible");
+}
+
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
+
+  function parseJSON(jsonString) {
+    try {
+      return JSON.parse(jsonString);
+    } catch (error) {
+      showError("JSON parsing failed.");
+      return null;
+    }
+  }
+
   const formData = new FormData(evt.target);
   const values = Object.fromEntries(formData);
-  const jsonData = JSON.parse(values.cards);
+  const jsonData = parseJSON(values.cards);
+  const colorValue = values.color.toLowerCase();
+
+  // Parsing failed, so don't continue.
+  if (jsonData === null) {
+    return;
+  }
+
+  if (
+    typeof jsonData.color === "string" &&
+    jsonData.color.toLowerCase() !== colorValue
+  ) {
+    showError("The JSON color does not match the selected deck color.");
+    return;
+  }
+
+  if (
+    typeof jsonData.name !== "string" ||
+    jsonData.name.trim().length < 2 ||
+    jsonData.name.trim().length > 80
+  ) {
+    showError("The deck name must be a string between 2 and 80 characters.");
+    return;
+  }
+
+  if (!Array.isArray(jsonData.cards)) {
+    showError("Cards must be an array.");
+    return;
+  }
+
   const color = normalizeColor(values.color);
-  const uniqueID = `slugify(values.name);-${Date.now()}`;
+  const uniqueID = `${slugify(jsonData.name)}-${Date.now()}`;
 
   const newDeck = {
-    id: uniqueID,
-    color: color,
+    _id: uniqueID,
+    color: colorValue,
     name: jsonData.name,
     cards: jsonData.cards,
   };
 
   decks.push(newDeck);
-
   window.location.hash = "deck/" + uniqueID;
-
-  console.log(decks);
 });
 
 /**
@@ -62,4 +112,4 @@ function normalizeColor(color) {
   return "#" + hex.toLowerCase();
 }
 
-export { disableSubmitBtn };
+export { disableSubmitBtn, showError };

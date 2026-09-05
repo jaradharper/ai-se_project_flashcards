@@ -9,6 +9,7 @@
 @import url("./not-found.css");
 @import url("./new-deck-view.css");
 @import url("./mobile-bar.css");
+@import url("./modal.css");
 
 * {
   box-sizing: border-box;

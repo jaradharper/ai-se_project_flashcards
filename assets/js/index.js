@@ -1,9 +1,10 @@
-import { decks } from "./decks.js";
+/*import { decks } from "./decks.js";*/
 import { hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
-import { getDeckByID } from "./decks.js";
+import { getDeckByID, fetchedDecks } from "./decks.js";
 import { renderDeckView } from "./deck-view.js";
-import { disableSubmitBtn } from "./new-deck-view.js";
+import { disableSubmitBtn, showError } from "./new-deck-view.js";
+import { getDecks } from "./api.js";
 
 const cardDeck = document.querySelector("#my-template");
 const newDeckButton = document.querySelector("#home .gallery__new-card-btn");
@@ -27,7 +28,7 @@ function createDeckEl(itemInDecks) {
   const cardEl = cardDeck.content.querySelector(".card").cloneNode(true);
 
   const deckLink = cardEl.querySelector(".card__link");
-  deckLink.href = `#deck/${itemInDecks.id}`;
+  deckLink.href = `#deck/${itemInDecks._id}`;
   deckLink.setAttribute("aria-label", `Open ${itemInDecks.name} deck`);
 
   const cardTitle = cardEl.querySelector(".card__title");
@@ -53,8 +54,6 @@ function renderDeckEl(itemInDecks) {
   const cardEl = createDeckEl(itemInDecks);
   cardDeckContainer.append(cardEl);
 }
-
-decks.forEach(renderDeckEl);
 
 const homeSection = document.querySelector("#home");
 const notFoundSection = document.querySelector("#not-found");
@@ -104,5 +103,19 @@ function router() {
 newDeckButton.addEventListener("click", () => {
   window.location.hash = "new-deck";
 });
-window.addEventListener("DOMContentLoaded", router);
+window.addEventListener("DOMContentLoaded", () => {
+  getDecks()
+    .then((decks) => {
+      fetchedDecks.push(...decks);
+      decks.forEach(renderDeckEl);
+    })
+    .catch(() => {
+      showError("Can't fetch decks");
+    })
+    .finally(() => {
+      router();
+    });
+});
 window.addEventListener("hashchange", router);
+
+export { renderDeckEl };

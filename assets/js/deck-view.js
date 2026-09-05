@@ -45,7 +45,7 @@ function renderDeckView(deck) {
   cardList.replaceChildren();
   deck.cards.forEach((card) => cardList.append(createCardElement(card, deck)));
   practiceButton.onclick = () => {
-    window.location.hash = `carousel/${deck.id}`;
+    window.location.hash = `carousel/${deck._id}`;
   };
   deckView.classList.add("gallery_type_deck_visible");
 }
