@@ -1,4 +1,7 @@
 const baseUrl = "https://se-flashcards-api.en.tripleten-services.com/v1";
+const headers = {
+  authorization: "01a07003-c5d2-73be-9e93-d22b24d9ac1e",
+};
 
 function processResponse(res) {
   if (res.ok) {
@@ -10,9 +13,14 @@ function processResponse(res) {
 
 function getDecks() {
   return fetch(`${baseUrl}/decks`, {
-    headers: {
-      authorization: "01a07003-c5d2-73be-9e93-d22b24d9ac1e",
-    },
+    headers: headers,
+  }).then(processResponse);
+}
+
+function deleteDeck(deckId) {
+  return fetch(`${baseUrl}/decks/${deckId}`, {
+    method: "DELETE",
+    headers: headers,
   }).then(processResponse);
 }
 
@@ -21,4 +29,4 @@ function getDecks() {
 }
   */
 
-export { getDecks };
+export { getDecks, deleteDeck };

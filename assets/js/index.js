@@ -4,7 +4,7 @@ import { renderCarouselView } from "./carousel.js";
 import { getDeckByID, fetchedDecks } from "./decks.js";
 import { renderDeckView } from "./deck-view.js";
 import { disableSubmitBtn, showError } from "./new-deck-view.js";
-import { getDecks } from "./api.js";
+import { getDecks, deleteDeck } from "./api.js";
 
 const cardDeck = document.querySelector("#my-template");
 const newDeckButton = document.querySelector("#home .gallery__new-card-btn");
@@ -37,7 +37,21 @@ function createDeckEl(itemInDecks) {
   const deleteBtn = cardEl.querySelector(".card__delete-btn");
 
   deleteBtn.addEventListener("click", () => {
-    cardEl.remove();
+    deleteDeck(itemInDecks._id)
+      .then(() => {
+        cardEl.remove();
+
+        const deckIndex = fetchedDecks.findIndex(
+          (deck) => deck._id === itemInDecks._id,
+        );
+
+        if (deckIndex !== -1) {
+          fetchedDecks.splice(deckIndex, 1);
+        }
+      })
+      .catch(() => {
+        showError("Can't delete deck");
+      });
   });
 
   const color = hexToString(itemInDecks.color);
