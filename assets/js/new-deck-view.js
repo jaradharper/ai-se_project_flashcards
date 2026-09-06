@@ -1,6 +1,8 @@
 import { decks } from "./decks.js";
-import { addDeck } from "./api.js";
+import { addDeck, getDecks } from "./api.js";
 import { fetchedDecks } from "./decks.js";
+import { renderDeckEl } from "./index.js";
+import { renderDeckView } from "./deck-view.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 const form = document.querySelector("#new-deck-form");
@@ -77,20 +79,28 @@ form.addEventListener("submit", (evt) => {
     name: jsonData.name,
     cards: jsonData.cards,
   };
-
   addDeck({
     color: colorValue,
     name: jsonData.name,
     cards: jsonData.cards,
   })
+    .then((createdDeck) => {
+      return getDecks().then((decks) => {
+        return decks.find((deck) => deck._id === createdDeck._id);
+      });
+    })
     .then((newDeck) => {
+      if (!newDeck) {
+        throw new Error("Created deck could not be loaded");
+      }
+
       fetchedDecks.push(newDeck);
+      renderDeckEl(newDeck);
+      window.location.hash = "deck/" + newDeck._id;
     })
     .catch(() => {
-      showError("Can't create deck");
+      showError("Can't create or load deck");
     });
-
-  window.location.hash = "deck/" + newDeck._id;
 });
 
 /**

@@ -1,6 +1,7 @@
 const baseUrl = "https://se-flashcards-api.en.tripleten-services.com/v1";
 const headers = {
   authorization: "01a07003-c5d2-73be-9e93-d22b24d9ac1e",
+  "Content-Type": "application/json",
 };
 
 function processResponse(res) {
