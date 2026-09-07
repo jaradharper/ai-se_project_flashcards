@@ -2,6 +2,12 @@ import { getDeckByID } from "./decks.js";
 import { removeColorClasses } from "./colors.js";
 import { hexToString } from "./colors.js";
 
+/**
+ * Initializes practice at the first card and attaches navigation and flip handlers.
+ *
+ * @param {import('./decks.js').Deck} deck - Deck containing at least one full card object.
+ * @returns {void}
+ */
 function renderCarouselView(deck) {
   let currentIndex = 0;
   let showingQuestion = true;
@@ -21,15 +27,32 @@ function renderCarouselView(deck) {
   const color = hexToString(deck.color);
   cardTextElement.classList.add(`carousel__card-text_color_${color}`);
 
+  /**
+   * Disables a carousel button and applies its disabled appearance.
+   *
+   * @param {HTMLButtonElement} buttonEl - Button to disable.
+   * @returns {void}
+   */
   function disableButton(buttonEl) {
     buttonEl.classList.add("carousel__btn_disabled");
     buttonEl.disabled = true;
   }
+  /**
+   * Enables a carousel button and removes its disabled appearance.
+   *
+   * @param {HTMLButtonElement} buttonEl - Button to enable.
+   * @returns {void}
+   */
   function enableButton(buttonEl) {
     buttonEl.classList.remove("carousel__btn_disabled");
     buttonEl.removeAttribute("disabled");
   }
 
+  /**
+   * Updates navigation buttons for the current index and deck length.
+   *
+   * @returns {void}
+   */
   function updateArrows() {
     if (currentIndex === 0) {
       disableButton(leftBtn);
@@ -44,6 +67,11 @@ function renderCarouselView(deck) {
     }
   }
 
+  /**
+   * Shows the current question or answer, updates the counter, and refreshes arrows.
+   *
+   * @returns {void}
+   */
   function updateDisplay() {
     const currentCard = deck.cards[currentIndex];
     cardTextElement.textContent = currentCard.question;

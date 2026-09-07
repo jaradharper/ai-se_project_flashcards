@@ -1,4 +1,3 @@
-import { decks } from "./decks.js";
 import { addDeck, getDecks } from "./api.js";
 import { fetchedDecks } from "./decks.js";
 import { renderDeckEl } from "./index.js";
@@ -12,16 +11,33 @@ const errorModal = document.querySelector("#error-modal");
 const errorModalCloseButton = errorModal.querySelector(".modal__close_btn");
 const errorModalMessage = errorModal.querySelector(".modal__error");
 
+/**
+ * Enables the deck submit button by setting disabled to false.
+ * Despite its name, the current implementation enables the button.
+ *
+ * @returns {void}
+ */
 function disableSubmitBtn() {
   sbmtBtn.disabled = false;
 }
 
+/**
+ * Hides the error modal.
+ *
+ * @returns {void}
+ */
 function closeModal() {
   errorModal.classList.remove("modal_visible");
 }
 
 errorModalCloseButton.addEventListener("click", closeModal);
 
+/**
+ * Sets the error modal message and makes the modal visible.
+ *
+ * @param {string} message - Error text to display.
+ * @returns {void}
+ */
 function showError(message) {
   errorModalMessage.textContent = message;
   errorModal.classList.add("modal_visible");
@@ -30,6 +46,12 @@ function showError(message) {
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
 
+  /**
+   * Parses form JSON and displays an error modal if parsing fails.
+   *
+   * @param {string} jsonString - JSON text entered in the form.
+   * @returns {*} Parsed JSON value, or null on failure. Valid JSON null also returns null.
+   */
   function parseJSON(jsonString) {
     try {
       return JSON.parse(jsonString);
@@ -104,12 +126,11 @@ form.addEventListener("submit", (evt) => {
 });
 
 /**
- * Converts a string to a URL-safe slug: lowercase with any run of
- * non-alphanumeric characters replaced by a single hyphen, and no leading or
- * trailing hyphens.
+ * Lowercases and trims text, replacing runs of non-ASCII letters and digits
+ * with hyphens and removing leading or trailing hyphens.
  *
- * @param {string} str
- * @returns {string}
+ * @param {string} str - Text to turn into a URL-friendly slug.
+ * @returns {string} Normalized slug.
  */
 function slugify(str) {
   return str
@@ -120,12 +141,11 @@ function slugify(str) {
 }
 
 /**
- * Returns a consistent lowercase hex color string with a leading "#".
- * Accepts values with or without a leading "#". Returns "#64d583" as a
- * fallback if the value is missing or not a valid 6-digit hex.
+ * Adds a missing # prefix to a valid six-digit hexadecimal color.
+ * Returns #64d583 for empty or invalid input; preserves letter case.
  *
- * @param {string|undefined} color
- * @returns {string}
+ * @param {string} [color] - Hexadecimal color with or without #.
+ * @returns {string} Valid hexadecimal color including #, or the fallback green.
  */
 function normalizeColor(color) {
   if (!color) return "#64d583";

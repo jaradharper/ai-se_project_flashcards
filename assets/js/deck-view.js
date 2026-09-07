@@ -7,6 +7,14 @@ const cardTemplate = document.querySelector("#card-template");
 const practiceButton = deckView.querySelector(".gallery__practice-btn");
 const page = document.querySelector(".page");
 
+/**
+ * Clones a flashcard and attaches flip and local deletion handlers.
+ * Deletion updates the supplied deck and DOM only; it does not call the server.
+ *
+ * @param {import('./decks.js').Card} card - Question and answer to display.
+ * @param {import('./decks.js').Deck} deck - Owning deck, supplying its color and mutable cards array.
+ * @returns {HTMLLIElement} Populated flashcard, not yet attached to the page.
+ */
 function createCardElement(card, deck) {
   const cardElement = cardTemplate.content
     .querySelector(".card")
@@ -39,6 +47,12 @@ function createCardElement(card, deck) {
   return cardElement;
 }
 
+/**
+ * Replaces the displayed cards with those in the deck and sets its practice link.
+ *
+ * @param {import('./decks.js').Deck} deck - Deck with full card objects to render.
+ * @returns {void}
+ */
 function renderDeckView(deck) {
   page.classList.remove("page_no-mobile-bar");
   title.textContent = deck.name;
@@ -53,12 +67,11 @@ function renderDeckView(deck) {
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
 /**
- * Converts a string to a URL-safe slug: lowercase with any run of
- * non-alphanumeric characters replaced by a single hyphen, and no leading or
- * trailing hyphens.
+ * Lowercases and trims text, replacing runs of non-ASCII letters and digits
+ * with hyphens and removing leading or trailing hyphens.
  *
- * @param {string} str
- * @returns {string}
+ * @param {string} str - Text to turn into a URL-friendly slug.
+ * @returns {string} Normalized slug.
  */
 function slugify(str) {
   return str
@@ -69,12 +82,11 @@ function slugify(str) {
 }
 
 /**
- * Returns a consistent lowercase hex color string with a leading "#".
- * Accepts values with or without a leading "#". Returns "#64d583" as a
- * fallback if the value is missing or not a valid 6-digit hex.
+ * Adds a missing # prefix to a valid six-digit hexadecimal color.
+ * Returns #64d583 for empty or invalid input; preserves letter case.
  *
- * @param {string|undefined} color
- * @returns {string}
+ * @param {string} [color] - Hexadecimal color with or without #.
+ * @returns {string} Valid hexadecimal color including #, or the fallback green.
  */
 function normalizeColor(color) {
   if (!color) return "#64d583";

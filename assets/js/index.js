@@ -1,4 +1,3 @@
-/*import { decks } from "./decks.js";*/
 import { hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
 import { getDeckByID, fetchedDecks } from "./decks.js";
@@ -15,7 +14,15 @@ const deckViewSection = document.querySelector("#deck-view");
 const newDeckView = document.querySelector("#new-deck-view");
 const page = document.querySelector(".page");
 const sections = document.querySelectorAll(".page__main-content > section");
+const aboutView = document.querySelector("#about-view");
 
+/**
+ * Hides all main sections, then shows the requested section.
+ *
+ * @param {HTMLElement} currentSection - Section to display.
+ * @param {string} display - CSS display value, such as block or grid.
+ * @returns {void}
+ */
 function showView(currentSection, display) {
   sections.forEach((section) => {
     section.style.display = "none";
@@ -24,6 +31,12 @@ function showView(currentSection, display) {
   currentSection.style.display = display;
 }
 
+/**
+ * Clones a deck tile, fills its details, and attaches its server deletion handler.
+ *
+ * @param {import('./decks.js').Deck} itemInDecks - Deck represented by the tile.
+ * @returns {HTMLLIElement} Populated tile, not yet attached to the page.
+ */
 function createDeckEl(itemInDecks) {
   const cardEl = cardDeck.content.querySelector(".card").cloneNode(true);
 
@@ -64,6 +77,12 @@ function createDeckEl(itemInDecks) {
   return cardEl;
 }
 
+/**
+ * Creates a deck tile and appends it to the home page list.
+ *
+ * @param {import('./decks.js').Deck} itemInDecks - Deck to display.
+ * @returns {void}
+ */
 function renderDeckEl(itemInDecks) {
   const cardEl = createDeckEl(itemInDecks);
   cardDeckContainer.append(cardEl);
@@ -72,16 +91,32 @@ function renderDeckEl(itemInDecks) {
 const homeSection = document.querySelector("#home");
 const notFoundSection = document.querySelector("#not-found");
 
+/**
+ * Shows the home section and restores the mobile navigation bar.
+ *
+ * @returns {void}
+ */
 function renderHomeView() {
   showView(homeSection, "block");
   page.classList.remove("page_no-mobile-bar");
 }
 
+/**
+ * Shows the not-found section and hides the mobile navigation bar.
+ *
+ * @returns {void}
+ */
 function renderNotFoundView() {
   showView(notFoundSection, "block");
   page.classList.add("page_no-mobile-bar");
 }
 
+/**
+ * Reads the URL hash and displays the matching view using cached deck data.
+ * Unknown routes, missing decks, and empty practice decks show the not-found view.
+ *
+ * @returns {void}
+ */
 function router() {
   const hash = window.location.hash.slice(1) || "home";
   const hashSplitter = hash.split("/");
@@ -93,6 +128,10 @@ function router() {
 
   if (hash === "home") {
     renderHomeView();
+    mainContent.classList.remove("page__main-content_location_carousel");
+  } else if (hash === "about") {
+    showView(aboutView, "block");
+    page.classList.remove("page_no-mobile-bar");
     mainContent.classList.remove("page__main-content_location_carousel");
   } else if (hash === "new-deck" || hash === "new-deck-view") {
     showView(newDeckView, "block");
