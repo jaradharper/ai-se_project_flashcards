@@ -133,5 +133,5 @@ data from the server again.
 
 ## Project Pitch Video
 
-[Watch the project pitch](https://drive.google.com/file/d/1CtSMvZAnSmKS-zVeBQykMQI4Bg6jZj_h/view?usp=drive_link),
+[Watch the project pitch](https://www.loom.com/share/9adcb4cc60e34f24a4f652564515ce7d),
 where I describe the project and challenges I faced while building it.
