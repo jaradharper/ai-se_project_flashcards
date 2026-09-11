@@ -126,22 +126,26 @@ function router() {
 
   const deck = getDeckByID(hashId);
 
+  function removeCarousel() {
+    mainContent.classList.remove("page__main-content_location_carousel");
+  }
+
   if (hash === "home") {
     renderHomeView();
-    mainContent.classList.remove("page__main-content_location_carousel");
+    removeCarousel();
   } else if (hash === "about") {
     showView(aboutView, "block");
     page.classList.remove("page_no-mobile-bar");
-    mainContent.classList.remove("page__main-content_location_carousel");
+    removeCarousel();
   } else if (hash === "new-deck" || hash === "new-deck-view") {
     showView(newDeckView, "block");
     disableSubmitBtn();
     page.classList.remove("page_no-mobile-bar");
-    mainContent.classList.remove("page__main-content_location_carousel");
+    removeCarousel();
   } else if (hash.startsWith("deck/") && deck) {
     showView(deckViewSection, "grid");
     renderDeckView(deck);
-    mainContent.classList.remove("page__main-content_location_carousel");
+    removeCarousel();
   } else if (hash.startsWith("carousel/") && deck && deck.cards.length) {
     page.classList.add("page_no-mobile-bar");
     showView(carouselEl, "flex");
@@ -149,7 +153,7 @@ function router() {
     mainContent.classList.add("page__main-content_location_carousel");
   } else {
     renderNotFoundView();
-    mainContent.classList.remove("page__main-content_location_carousel");
+    removeCarousel();
   }
 }
 

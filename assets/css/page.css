@@ -4,8 +4,8 @@
   box-sizing: border-box;
   margin: 0 auto;
   min-height: 100vh;
-  padding: 20px 40px 32px;
-  max-width: 1440px;
+  padding: 20px 48px 32px;
+  width: 100%;
   background-color: #ececec;
   font-family: "Inter", Arial, Helvetica, sans-serif;
   color: #1a1a1a;
